@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Travel Management</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="stylesheets/bootstrap.css"> 
+  <link rel="shortcut icon" href="assets/img/logo.png">
+  <script>
+      sessionStorage.clear();
+      </script>
+
+<style>
+    body {
+        background-color: white;
+    }
+
+    #loginbox {
+        margin-top: 90px;
+    }
+
+    #loginbox > div:first-child {        
+        padding-bottom: 10px;    
+    }
+
+    .iconmelon {
+        display: block;
+        margin: auto;
+    }
+
+    #form > div {
+        margin-bottom: 25px;
+    }
+
+    #form > div:last-child {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .panel {    
+        background-color: transparent;
+    }
+
+    .panel-body {
+        padding-top: 30px;
+        background-color: rgba(2555,255,255,.3);
+    }
+
+    #particles {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        top: 0;                        
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        z-index: -2;
+    }
+
+    .iconmelon,
+    .im {
+        position: relative;
+        text-align: center;
+        display: block;
+        fill: #525151;
+    }
+
+    .iconmelon:after,
+    .im:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .pull-right{
+        float:right;
+    }
+	.error{
+	color:red;
+}
+.error::-webkit-input-placeholder {
+    color: red;
+}
+</style>
+ </head>
+ <body>
+<div class="container">    
+
+    <div class="content">
+        <div id="large-header" class="large-header">
+
+            <div id="loginbox" class="mainbox col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3"> 
+
+                <div class="row">     
+                    <div class="clearfix">
+                        &nbsp;
+                    </div>
+                    
+                <div class="panel panel-default" >
+                    <div class="panel-heading">
+                        <div class="panel-title text-center" ><img src="images/images.png" style="width:280px" /></div>
+                    </div>     
+
+                    <div class="panel-body" >
+					
+                        <form name="loginval" action="" id="loginval" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                                                        <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="userID" type="text" class="form-control" name="userID" value="" placeholder="Enter Login Id	">                                        
+                            </div>
+                            <div style="height:20px"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="userPwd" type="password" class="form-control" name="userPwd" placeholder="Enter Password">
+                            </div>  
+
+                             
+                            <input type="hidden" name="deviceType" id="deviceType" value="web" />                                
+
+                            <div class="form-group">
+                                <!-- Button -->
+                                <div style="height:20px"></div>
+                                <div class="col-sm-12 controls col-md-12 text-center">
+            <a href="dashboard.htm" class="btn btn-primary"><i class="glyphicon glyphicon-log-in"></i> Login </a>           
+                                </div>
+
+<!--<script src="public/config/config.js"></script> -->   
+    <script src="jquery.js"></script>    
+	<script type="text/javascript" language="javascript" src="jquery-validate.js"></script>
+	<script src="findlogin.js"></script> 
+                               
+                            </div>
+                        </form> 
+                    </div>                     
+                </div>  
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+</body>
+</html>

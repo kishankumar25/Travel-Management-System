@@ -1,0 +1,601 @@
+<html lang="en">
+<head>
+      
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Management</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- BOOTSTRAP STYLES-->
+    <link href="stylesheets/bootstrap.css" rel="stylesheet" /> 
+     <!-- FONTAWESOME STYLES-->
+    <link href="stylesheets/font-awesome.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+     <!-- GOOGLE FONTS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/session.js"> </script>
+  
+
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+
+   
+
+<style type="text/css">
+
+.table-hover > tbody > tr:hover {
+  background-color: #D2D2D2;
+  }
+ fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+.testdiv {
+   border-right: 1px solid;
+}
+legend.scheduler-border1 {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width:auto;
+        padding:0 10px;
+        border-bottom:none;
+    }
+   .myfooter{
+     position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    /*background-color: #f5f5f5;*/ 
+  }
+  .textbox { 
+    background: white; 
+    border: 1px double #DDD; 
+    border-radius: 5px; 
+    box-shadow: 0 0 1px #333; 
+    color: #666; 
+    outline: none; 
+    height:35px; 
+    width: 200px; 
+  }
+  legend { 
+    display: block;
+    padding-left: 2px;
+    padding-right: 2px;
+    border: none;
+}
+  .textbox1 { 
+    background: white; 
+    border: 1px double #DDD; 
+    border-radius: 5px; 
+    box-shadow: 0 0 1px #333; 
+    color: #666; 
+    outline: none; 
+    height:35px; 
+    width: 100px; 
+  }
+   td{
+    text-align:center;
+     width:12%;
+    }
+    button{
+      width: 100px;
+}
+.button1{
+      width: 150px;
+}
+.my-error-class {
+    color:red;
+}
+.my-valid-class {
+    color:green;
+}
+.error {
+    color:red;
+}
+.error1 {
+    color:red;
+}
+
+   </style>
+   
+</head>
+
+<body>
+
+
+    <div id="wrapper">
+         <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="images/images.png" style="width:180px" />
+                    </a>
+                </div>
+              
+                 <span class="logout-spn" >
+                  <a href="#" style="color:#fff;" onclick="logout()">LOGOUT</a>  
+
+                </span>
+            </div>
+        </div>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                     <li >
+                        <a href="dashboard.htm" ><span class="glyphicon glyphicon-list-alt "></span> Dashboard <span class="badge"></span></a>
+                    </li>
+                    <li class="active-link">
+                        <a href="claim.htm"><span class="glyphicon glyphicon-user "></span> Claim  <span class="badge"></span></a>
+                    </li>
+                    <li>
+                        <a href="client.htm"><span  class="glyphicon glyphicon-stats "></span> Status<span class="badge"></span></a>
+                    </li> 
+                     <li>
+                        <a href="notification.htm"><span class="glyphicon glyphicon-envelope "></span> Notifications <span class="badge"></span></a>
+                    </li>
+                    
+                    
+                </ul>
+              </div>
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+            <form method="post" action= "/form" >
+              
+
+                <div class="row">
+                    <div class="col-md-10">
+                     <h3><span class="glyphicon glyphicon-user "></span> &nbsp;Claim</h3>   
+                    </div>
+                </div>              
+                 <!-- /. ROW  -->
+                 
+                  <fieldset class="scheduler-border">
+                  <legend class="scheduler-border1">Claim Details</legend>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="gstin" >
+                        <h5>Select Source:</h5>
+                        <select class="form-control" name="gstin1" id="gstin1" required >
+                          <option  value="0">Please Choose...</option>
+                            <option value="Bihar" >Bihar</option>
+                          <option value="Delhi" >Delhi</option>
+                          <option value="Haryana" >Haryana</option>
+                          <option value="Indore" >Indore</option>
+                          <option value="Jharkhand" >Jharkhand</option>
+                          <option value="UP" >UP</option>
+                        </select>
+                      </div>
+                       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="gstr" >
+                         <h5>Select Designation:</h5>
+                        <select class="form-control" name="gstin2" id="gstin1" required >
+                          <option  value="0">Please Choose...</option>
+                          <option value="Bihar" >Bihar</option>
+                          <option value="Delhi" >Delhi</option>
+                          <option value="Haryana" >Haryana</option>
+                          <option value="Indore" >Indore</option>
+                          <option value="Jharkhand" >Jharkhand</option>
+                          <option value="UP" >UP</option>
+                        </select>
+                      </div>
+					  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="gstr" >
+					  <h5>Price:</h5>
+					  <input id="Priceid" type="text" class="form-control" name="price" placeholder="Enter Price	"> 
+                      </div>
+                      </div>
+                  </fieldset>
+                  
+                   
+             <fieldset class="scheduler-border">
+                <legend class="scheduler-border1">Date</legend> 
+               <div class="row">
+               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="sdate1" >
+                <h5>Start Date</h5>
+                <div class="input-group">
+                  <span class="input-group-addon">  <i class="fa fa-calendar"></i></span>
+                  <input type="Date" id="sdate" name="sdate" class="form-control" required />
+                </div>
+                <label for="sdate" class="error" style="display:none;">Please choose one.</label>
+              </div>
+              
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="sdate1" >
+                <h5>End Date</h5>
+                <div class="input-group">
+                  <span class="input-group-addon">  <i class="fa fa-calendar"></i></span>
+                  <input type="Date" id="sdate" name="edate" class="form-control" required />
+                </div>
+                <label for="sdate" class="error" style="display:none;">Please choose one.</label>
+              </div>
+              </div>
+               </fieldset>
+          
+             <fieldset class="scheduler-border">
+                <legend class="scheduler-border1">Schedule time</legend>   
+      						<div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="start" >
+                      <h5>Start Time </h5>
+                      <div class="input-group">
+                        <span class="input-group-addon">  <i class="fa fa-clock-o"></i></span>
+                        <input type="time" id="stime" name="stime" class="form-control" required />
+                      </div>
+                      <label for="stime" class="error" style="display:none;">Please choose one.</label>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="end" >
+                      <h5>End Time</h5>
+                      <div class="input-group">
+                        <span class="input-group-addon">  <i class="fa fa-clock-o"></i></span>
+                        <input type="time" id="etime" name="etime" class="form-control"  />
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="duration1" >
+                              <h5>Duration:</h5>
+                      
+                              <select class="form-control" id="duration" name ="duration">
+                                <option  value="">Please Choose...</option>
+                                  <option value="15 Min" >15 Minutes</option>
+                                  <option value="30 Min" >30 Minutes</option>
+                                  <option value="45 Min" >45 Minutes</option>
+                              </select> 
+
+                            </div>
+                           </div>
+                </fieldset> 
+                    
+                 
+             <div class="row">       
+            <div  class="col-lg-9 col-md-9 col-sm-9 col-xs-9"  id="save" >
+              <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div> 
+                <div class="form-group">
+                  <button  type="submit" class="btn btn-primary " id="ok"><i >OK</i></button> 
+                  <button  type="reset" class="btn btn-primary " id="cancel"><i >Cancel</i></button> 
+                 
+                </div>
+              </div>
+              </div>          
+        </form>
+    </div>
+             <!-- /. PAGE INNER  -->
+  </div>
+         <!-- /. PAGE WRAPPER  -->
+  </div>
+    <div class="footer">
+      
+    
+             <div class="row">
+                <div class="col-lg-12" >
+                     &copy; SWiss Travel Management Private Limited &nbsp;&nbsp;Visit us:<a href="http://gapbridgesoft.com/" style="color:#fff;"  target="_blank">www.swisstravelmangement.com</a>
+                </div>
+        </div>
+        </div>
+          
+
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    </form>
+</body>
+
+<script type="text/javascript">
+var  outobj = {};
+$(document).ready(function () {
+    /* $('#enddateerror').hide();*/
+$("#enddatecount").prop("disabled", true);
+        $("#edate").prop("disabled", true);
+$("#enddatecount").focus(function(){
+$("#enddateerror").hide();
+})
+$("#edate").focus(function(){
+$("#enddateerror1").hide();
+})
+
+    $('#myform').validate({ // initialize the plugin
+     
+            rules: {            
+              'gstin1': {
+                selectcheck: true,
+              },
+              'gstr1': {
+                selectcheck: true,
+              },
+              'gstintype1': {
+                selectcheck: true,
+              },
+               stime:{ required:true },
+              everyday:{ required:true },
+              sdate:{ required:true },
+              edate:{ required:true 
+
+              },           
+              day1: {
+                required: true,
+                
+            }
+
+          },
+            messages: {            
+              'gstin1': {
+                selectcheck: "Please select the Source",
+              },
+              'gstr1': {
+                selectcheck: "Please select the Designation",
+              },
+              'gstintype1': {
+                selectcheck: "Please select the Price",
+              },
+              everyday: {
+                required: "Please select daily or Weekdays",
+              },
+              day1: {
+                required: "You must check at least 1 day",
+            },
+             sdate: {
+                required: "You must give the starting date",
+            },
+            edate: {
+                required: "You must give the ending date",
+            },
+            stime: {
+                required: "You must give the starting time",
+            },
+            }
+    });
+
+    jQuery.validator.addMethod('selectcheck', function (value) {
+        return (value != '0');
+    }, "field is required");
+});
+</script>
+
+<script type="text/javascript">
+ var  outobj = {};
+ var daily ={};
+ var weekly ={};
+ var names = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
+  //debugger;
+  $("form input:radio").change(function () {
+    if ($("#daily").is(":checked")) {
+        $('#daily1').show();
+        $('#week').hide();
+    } else if($("#weekly").is(":checked")) {
+       $('#daily1').hide();
+      $('#week').show();
+        }
+  });
+  //debugger;
+  $("form input:radio").change(function () {
+    if ($("#day").is(":checked")) {
+     
+        $("#daycount").prop("disabled", false);
+    } else if($("#weekday").is(":checked")) {
+      document.getElementById("daycount").value ="";
+       $("#daycount").prop("disabled", true);
+        }
+  });
+  $("form input:radio").change(function () {
+    if ($("#enddate1").is(":checked")) {
+      document.getElementById("enddatecount").value ="";
+         $('#enddateerror').hide();
+         $('#enddateerror1').hide();
+        $("#enddatecount").prop("disabled", true);
+        $("#edate").prop("disabled", true);
+    }
+    else if($("#enddate2").is(":checked")) {
+       document.getElementById("enddatecount").value ="";
+       $('#enddateerror1').hide();
+       $("#enddatecount").prop("disabled", false);
+        $("#edate").prop("disabled", true);
+    }
+    else if($("#enddate3").is(":checked")) {
+       document.getElementById("enddatecount").value = "";
+        $('#enddateerror').hide();
+       $("#enddatecount").prop("disabled", true);
+        $("#edate").prop("disabled", false);
+    }
+    
+  });
+
+  $("#ok").on("click",function(){
+
+   // debugger;
+    outobj.gstin = document.getElementById("gstin1").value;
+    var gstr = document.getElementById("gstr1").value;
+    var gstintype = document.getElementById("gstintype1").value;
+    
+    var stime = document.getElementById("stime").value;
+    outobj.stime = stime;
+            arr = stime.split(':');
+        hour = $.trim(arr[0]);
+        min = $.trim(arr[1]);
+        
+        /*alert(hour);
+        alert(min);*/
+       
+    var etime = document.getElementById("etime").value;
+    if(etime != ""){
+      outobj.etime = etime;
+    }
+    var duration = document.getElementById("duration").value;
+    if(duration != "")
+    {
+      outobj.duration = duration;
+    }
+    debugger;
+    var daycount = "0";
+    var weekday1 ="0";
+    var weeknames ="0";
+          //alert(daycount);
+    if ($("#daily").is(":checked")) {
+        if($("#day").is(":checked")){
+          var daycount1 = "0";
+
+           daycount1 = document.getElementById("daycount").value;
+          if(daycount1 == ""){
+            daycount = 1;
+          }
+          else{
+           daycount = daycount1;
+          }
+          daily.daycount= daycount;
+
+        }else if($("#weekday").is(":checked"))
+        {
+          daily.weekday = names;
+          weekday1 = "MON-FRI"
+        }
+         outobj.daily = daily;
+    } 
+    else if($("#weekly").is(":checked")) {
+          //weekly.weekcount = document.getElementById("weekcount").value;
+           weeknames = $('input:checkbox:checked').map(function() {
+                          return this.value;
+            }).get();
+          /*$.each($("input[name='day1']:checked"), function(){            
+                     weeknames.push($(this).val());
+          });
+          outobj.weeknames;*/
+           weekly.weeknames =weeknames;
+      outobj.weekly = weekly;
+    }
+     outobj.startdate = document.getElementById("sdate").value;
+    if ($("#enddate1").is(":checked")) {
+          
+          outobj.enddate = "noenddate";
+       
+    } 
+    else if($("#enddate2").is(":checked")) {
+           var enddatecount = document.getElementById("enddatecount").value;
+           if(enddatecount === ""){
+            //  $("#enddateerror").removeAttr("style");
+              //alert("hi   "+enddatecount);
+              $("#enddateerror").show();
+           }
+           else
+            outobj.enddate = enddatecount;
+          
+    }
+    else if($("#enddate3").is(":checked")) {
+          
+          var edate = document.getElementById("edate").value;
+           if(edate === ""){
+              $("#enddateerror1").show();
+           }
+           else
+            outobj.enddate= edate;
+    }
+     
+    if(  gstr === "GSTR2" && gstintype === "INVOICE") {
+        outobj.gstr = gstr;
+        outobj.gstintype = "PURCHASE_INVOICE";
+        //console.log(outobj);
+      }
+      else{
+        outobj.gstr = gstr;
+        outobj.gstintype  = gstintype;
+        
+        //alert(outobj);
+      } 
+     
+      alert(JSON.stringify(outobj));
+      console.log(outobj);
+
+debugger;
+      var cron = {};
+      if(daycount != 0){
+        cron = "0"+" "+min+" "+hour+" "+"*/"+daycount+" "+"*"+" "+"?";
+      }
+      else if(weekday1 != 0){
+        cron = "0"+" "+min+" "+hour+" "+"*"+" "+"*"+" "+weekday1;
+      }
+      else if(weeknames != 0){
+        cron = "0"+" "+min+" "+hour+" "+"*"+" "+"*"+" "+weeknames;
+      }
+      alert(cron);
+    //debugger;
+    var url1 = "http://203.92.59.36:5000/schedulerSchema";
+    /*$.ajax({ 
+      type: 'POST',
+      url: url1,
+      data: outobj,
+      ContentType: "application/json",
+      dataType: "json",
+      async: false,
+      success: function(data) {
+         debugger;
+        console.log(data);
+        //alert("success");
+        if(data)
+          {
+            alert("succesfully request registered");
+          }
+        else
+          {console.log("Error");}
+      },
+      error: function(msg) {
+        alert("enter the correct data");
+        returnVal = false;
+      }
+    })*/
+  });
+ 
+</script>
+<script type="text/javascript">
+/*$(document).ready(function(){
+var statuscd;
+   var empid = sessionStorage.getItem("userid");
+   var req_list = [];
+    $.ajax({ 
+            type:"GET",
+            url: "http://localhost:5000/schedule",
+            dataType: "json",
+            async: false,
+            success: function(data){
+          //alert("success::"+data);
+            var json = data;
+            var content = '';
+            for (var i = 0; i < json.length; i++) {
+          //var treqdate = json[i].date;
+          //treqdate = treqdate.slice(0,10);
+            content += '<tr>';
+            content += '<td>' + json[i].gstin + '</td>';
+            content += '<td>' + json[i].gstr + '</td>';
+            content += '<td>' + json[i].gstintype + '</td>';
+            content += '<td>' + json[i].schedule + '</td>';
+            content += '<td>' + json[i].weekly + '</td>';
+            content += '<td>' + json[i].time + '</td>';
+            content += '</tr>';
+            }
+            $('#clrows').append(content);
+            }
+    })
+});*/
+$("#remove").on("click",function(){
+  debugger;
+    $("#enddate1").prop("checked", false);
+    $("#enddate2").prop("checked", false);
+    $("#enddate3").prop("checked", false);
+    document.getElementById("edate").value="";
+    document.getElementById("enddatecount").value="";
+
+   });
+</script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>  
+  <script type="text/javascript" language="javascript" src="assets/js/jquery-validate.js"></script>
+    <script src="assets/js/custom.js"></script>
+</html>
